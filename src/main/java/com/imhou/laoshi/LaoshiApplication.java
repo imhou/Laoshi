@@ -1,5 +1,11 @@
 package com.imhou.laoshi;
 
+import com.imhou.laoshi.decorator.Coffee;
+import com.imhou.laoshi.decorator.Drink;
+import com.imhou.laoshi.decorator.coffee.Decaf;
+import com.imhou.laoshi.decorator.coffee.LongBlack;
+import com.imhou.laoshi.decorator.flavour.Chocolate;
+import com.imhou.laoshi.decorator.flavour.Milk;
 import com.imhou.laoshi.observer.CurrentConditions;
 import com.imhou.laoshi.observer.WeatherDataSubject;
 import com.imhou.laoshi.strategy.GreenHeadDuck;
@@ -29,5 +35,19 @@ public class LaoshiApplication {
         CurrentConditions currentConditions = new CurrentConditions();
         weatherDataSubject.registerObserver(currentConditions);
         weatherDataSubject.setData(30, 150, 40);
+
+        Drink coffee = new Decaf();
+        System.out.println("Coffee price: " + coffee.cost());
+        System.out.println("Coffee desc : " + coffee.getDescription());
+
+        System.out.println("**************************************");
+
+        coffee = new LongBlack();
+        coffee = new Milk(coffee);
+        coffee = new Chocolate(coffee);
+
+        System.out.println("Coffee price: " + coffee.cost());
+        System.out.println("Coffee desc : " + coffee.getDescription());
+
 	}
 }
